@@ -1,4 +1,4 @@
-#
+#!/usr/bin/env python3
 # -*- mode: python tab-width: 4 coding: utf-8 -*-
 """
 Read the UK Government .ICS file, extract the Bank Holidays with associated
