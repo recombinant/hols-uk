@@ -12,10 +12,13 @@ Given a date determine if it is a working day. Assumes:
 Description
 ===========
 
+Tested with Python 3.5 only.
+
 This package uses data from https://www.gov.uk/bank-holidays for statutory
 UK Bank Holidays to determine if a given date is a Bank Holiday::
 
     from datetime import date
+    from hols_uk import Holidays
 
     today = datetime.date.today()
     holidays = Holidays()
@@ -30,5 +33,5 @@ UK Bank Holidays to determine if a given date is a Bank Holiday::
 Note
 ====
 
-This project has been set up using PyScaffold 2.5.5. For details and usage
+This project has been set up using PyScaffold 2.5.7. For details and usage
 information on PyScaffold see http://pyscaffold.readthedocs.org/.
