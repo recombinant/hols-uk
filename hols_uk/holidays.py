@@ -5,6 +5,10 @@ import csv
 import datetime
 from operator import itemgetter
 from pathlib import Path
+from typing import Set
+
+Date = datetime.date
+DateSet = Set[datetime.date]
 
 
 # This module only requires the hols-uk.csv which is a text file
@@ -17,13 +21,12 @@ class Holidays:
     def __init__(self):
         self.__bank_holidays = None
 
-    def is_working_day(self, date):
+    def is_working_day(self, date: Date) -> bool:
         """
         Assuming that Sat & Sun are not working days and that
         all Bank holidays are not working days.
 
-        Returns:
-            bool: True if day is working day.
+        Returns: True if day is working day.
         """
         assert isinstance(date, datetime.date)
         if date.weekday() in [5, 6]:  # Saturday, Sunday
@@ -31,12 +34,12 @@ class Holidays:
         else:
             return date not in self.get_bank_holidays()
 
-    def is_bank_holiday(self, date):
+    def is_bank_holiday(self, date: Date) -> bool:
         return date in self.get_bank_holidays()
 
     def get_bank_holidays(self):
         if self.__bank_holidays is None:
-            if datetime.date.today() > datetime.date(2017, 1, 1):
+            if datetime.date.today() > datetime.date(2018, 1, 1):
                 print('visit https://www.gov.uk/bank-holidays')
                 print('for the latest bank holidays')
 
@@ -53,7 +56,7 @@ class Holidays:
 
         return self.__bank_holidays
 
-    def get_working_days(self, date1, date2):
+    def get_working_days(self, date1: Date, date2: Date) -> DateSet:
         """
         Number of working days in the (inclusive) interval
         between date1 and date2.

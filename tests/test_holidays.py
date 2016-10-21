@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import pytest
 import datetime
 
-from hols_uk import Holidays
+import pytest
+
+from hols_uk.holidays import Holidays
 
 
 @pytest.fixture(scope='module')
 def holidays():
     return Holidays()
-
 
 
 def test_1(holidays):
@@ -22,13 +22,24 @@ def test_1(holidays):
     days = holidays.get_working_days(date2, date1)
     assert len(days) == 8
 
+
+def test_2(holidays):
     assert not holidays.is_working_day(datetime.date(2016, 12, 24))
     assert not holidays.is_working_day(datetime.date(2016, 12, 25))
     assert not holidays.is_working_day(datetime.date(2016, 12, 26))
     assert not holidays.is_working_day(datetime.date(2016, 12, 27))
     assert holidays.is_working_day(datetime.date(2016, 12, 28))
 
-    date1 = datetime.date(2017, 1, 1)
-    date2 = datetime.date(2016, 12, 30)
-    days = holidays.get_working_days(date2, date1)
+
+def test_3(holidays):
+    date1 = datetime.date(2016, 12, 30)
+    date2 = datetime.date(2017, 1, 1)
+    days = holidays.get_working_days(date1, date2)
     assert len(days) == 1
+
+
+def test_4(holidays):
+    date1 = datetime.date(2016, 12, 25)
+    date2 = datetime.date(2016, 12, 26)
+    days = holidays.get_working_days(date1, date2)
+    assert len(days) == 0

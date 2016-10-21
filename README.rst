@@ -5,7 +5,7 @@ hols-uk
 
 Given a date determine if it is a working day. Assumes:
 
-    - Mon-Sat working week
+    - Mon-Fri working week
     - UK Bank Holidays
 
 
