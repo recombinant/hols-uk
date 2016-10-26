@@ -9,9 +9,10 @@ import datetime
 import re
 from datetime import timedelta
 from pathlib import Path
+from typing import Dict
 
 
-def hols2csv(holidays, csv_path):
+def hols2csv(holidays: dict, csv_path: Path) -> None:
     """
     Add the holidays to `csv_path`. Create `csv_path` if necessary.
 
@@ -40,7 +41,7 @@ def hols2csv(holidays, csv_path):
             writer.writerow([day.strftime('%d-%b-%Y'), existing_holidays[day]])
 
 
-def import_ics(ics_path):
+def import_ics(ics_path: Path) -> Dict[datetime.date, str]:
     """
     Import the .ics file holding the UK Bank holidays.
 
