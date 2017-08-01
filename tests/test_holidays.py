@@ -43,3 +43,10 @@ def test_4(holidays):
     date2 = datetime.date(2016, 12, 26)
     days = holidays.get_working_days(date1, date2)
     assert len(days) == 0
+
+
+def test_5(holidays):
+    date1 = datetime.date(2016, 12, 22)
+    date2 = datetime.date(2016, 12, 26)
+    assert not holidays.is_bank_holiday(date1)
+    assert holidays.is_bank_holiday(date2)

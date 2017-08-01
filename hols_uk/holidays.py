@@ -1,14 +1,10 @@
 #
-# -*- mode: python tab-width: 4 coding: utf-8 -*-
+# coding: utf-8
 #
 import csv
 import datetime
 from operator import itemgetter
 from pathlib import Path
-from typing import Set
-
-Date = datetime.date
-DateSet = Set[datetime.date]
 
 
 # This module only requires the hols-uk.csv which is a text file
@@ -19,9 +15,9 @@ DateSet = Set[datetime.date]
 #
 class Holidays:
     def __init__(self):
-        self.__bank_holidays = None
+        self._bank_holidays = None
 
-    def is_working_day(self, date: Date) -> bool:
+    def is_working_day(self, date):
         """
         Assuming that Sat & Sun are not working days and that
         all Bank holidays are not working days.
@@ -34,11 +30,11 @@ class Holidays:
         else:
             return date not in self.get_bank_holidays()
 
-    def is_bank_holiday(self, date: Date) -> bool:
+    def is_bank_holiday(self, date):
         return date in self.get_bank_holidays()
 
     def get_bank_holidays(self):
-        if self.__bank_holidays is None:
+        if self._bank_holidays is None:
             if datetime.date.today() > datetime.date(2018, 1, 1):
                 print('visit https://www.gov.uk/bank-holidays')
                 print('for the latest bank holidays')
@@ -52,21 +48,14 @@ class Holidays:
                     data = filter(bool, data)
                     data = (datetime.datetime.strptime(day, '%d-%b-%Y').date() for day in data)
                     holidays = {*data}
-            self.__bank_holidays = holidays
+            self._bank_holidays = holidays
 
-        return self.__bank_holidays
+        return self._bank_holidays
 
-    def get_working_days(self, date1: Date, date2: Date) -> DateSet:
+    def get_working_days(self, date1, date2):
         """
         Number of working days in the (inclusive) interval
         between date1 and date2.
-
-        Args:
-            date1 (datetime.date):
-            date2 (datetime.date):
-
-        Returns:
-            Number of working days.
         """
         assert isinstance(date1, datetime.date)
         assert isinstance(date2, datetime.date)
