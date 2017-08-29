@@ -61,8 +61,7 @@ def import_ics(ics_path):
     start_date = end_date = summary = None
 
     lines = ics_path \
-        .open('rt', encoding='UTF-8') \
-        .read() \
+        .read_text(encoding='UTF-8') \
         .splitlines(keepends=False)
 
     for line in lines:

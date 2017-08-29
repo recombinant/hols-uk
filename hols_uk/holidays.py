@@ -10,8 +10,9 @@ from pathlib import Path
 # This module only requires the hols-uk.csv which is a text file
 # (although it can be edited with Excel)
 #
-# There is a routine to import .ics calendar files and another to dump
-# the csv in ics2csv.py
+# ics2csv.py contains
+# - a routine to import .ics calendar files
+# - another routine to add holidays to a csv (creating if necessary)
 #
 class Holidays:
     def __init__(self):
@@ -24,13 +25,18 @@ class Holidays:
 
         Returns: True if day is working day.
         """
-        assert isinstance(date, datetime.date)
+        assert isinstance(date, (datetime.date, datetime.datetime))
         if date.weekday() in [5, 6]:  # Saturday, Sunday
             return False
         else:
+            if isinstance(date, datetime.datetime):
+                date = date.date()
             return date not in self.get_bank_holidays()
 
     def is_bank_holiday(self, date):
+        assert isinstance(date, (datetime.date, datetime.datetime))
+        if isinstance(date, datetime.datetime):
+            date = date.date()
         return date in self.get_bank_holidays()
 
     def get_bank_holidays(self):
@@ -57,8 +63,13 @@ class Holidays:
         Number of working days in the (inclusive) interval
         between date1 and date2.
         """
-        assert isinstance(date1, datetime.date)
-        assert isinstance(date2, datetime.date)
+        assert isinstance(date1, (datetime.date, datetime.datetime))
+        assert isinstance(date2, (datetime.date, datetime.datetime))
+
+        if isinstance(date1, datetime.datetime):
+            date1 = date1.date()
+        if isinstance(date2, datetime.datetime):
+            date2 = date2.date()
 
         if date1 > date2:
             date1, date2 = date2, date1
@@ -70,7 +81,6 @@ class Holidays:
         days = (day for day in days if day.weekday() in {0, 1, 2, 3, 4})
         days = set(days)
         # remove Bank Holidays
-        bank_holidays = self.get_bank_holidays()
-        days -= bank_holidays
+        days -= self.get_bank_holidays()
 
         return days

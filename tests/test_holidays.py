@@ -1,52 +1,1 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-import datetime
-
-import pytest
-
-from hols_uk.holidays import Holidays
-
-
-@pytest.fixture(scope='module')
-def holidays():
-    return Holidays()
-
-
-def test_1(holidays):
-    date1 = datetime.date(2016, 3, 28)
-    date2 = datetime.date(2016, 4, 7)
-
-    days = holidays.get_working_days(date1, date2)
-    assert len(days) == 8
-
-    days = holidays.get_working_days(date2, date1)
-    assert len(days) == 8
-
-
-def test_2(holidays):
-    assert not holidays.is_working_day(datetime.date(2016, 12, 24))
-    assert not holidays.is_working_day(datetime.date(2016, 12, 25))
-    assert not holidays.is_working_day(datetime.date(2016, 12, 26))
-    assert not holidays.is_working_day(datetime.date(2016, 12, 27))
-    assert holidays.is_working_day(datetime.date(2016, 12, 28))
-
-
-def test_3(holidays):
-    date1 = datetime.date(2016, 12, 30)
-    date2 = datetime.date(2017, 1, 1)
-    days = holidays.get_working_days(date1, date2)
-    assert len(days) == 1
-
-
-def test_4(holidays):
-    date1 = datetime.date(2016, 12, 25)
-    date2 = datetime.date(2016, 12, 26)
-    days = holidays.get_working_days(date1, date2)
-    assert len(days) == 0
-
-
-def test_5(holidays):
-    date1 = datetime.date(2016, 12, 22)
-    date2 = datetime.date(2016, 12, 26)
-    assert not holidays.is_bank_holiday(date1)
-    assert holidays.is_bank_holiday(date2)
+#!/usr/bin/env python# -*- coding: utf-8 -*-import datetimeimport pytestfrom hols_uk.holidays import Holidays@pytest.fixture(scope='module', name='holidays')def fixture_holidays():    return Holidays()def test01a(holidays):    date1 = datetime.date(2016, 3, 28)    date2 = datetime.date(2016, 4, 7)    days = holidays.get_working_days(date1, date2)    assert len(days) == 8    days = holidays.get_working_days(date2, date1)    assert len(days) == 8def test01b(holidays):    date1 = datetime.datetime(2016, 3, 28, 7, 5)    date2 = datetime.datetime(2016, 4, 7, 7, 10)    days = holidays.get_working_days(date1, date2)    assert len(days) == 8    days = holidays.get_working_days(date2, date1)    assert len(days) == 8def test02a(holidays):    assert not holidays.is_working_day(datetime.date(2016, 12, 24))    assert not holidays.is_working_day(datetime.date(2016, 12, 25))    assert not holidays.is_working_day(datetime.date(2016, 12, 26))    assert not holidays.is_working_day(datetime.date(2016, 12, 27))    assert holidays.is_working_day(datetime.date(2016, 12, 28))def test02b(holidays):    assert not holidays.is_working_day(datetime.datetime(2016, 12, 24, 7, 2))    assert not holidays.is_working_day(datetime.datetime(2016, 12, 25, 7, 3))    assert not holidays.is_working_day(datetime.datetime(2016, 12, 26, 7, 4))    assert not holidays.is_working_day(datetime.datetime(2016, 12, 27, 7, 5))    assert holidays.is_working_day(datetime.datetime(2016, 12, 28, 7, 6))def test03a(holidays):    date1 = datetime.date(2016, 12, 30)    date2 = datetime.date(2017, 1, 1)    days = holidays.get_working_days(date1, date2)    assert len(days) == 1def test03b(holidays):    date1 = datetime.datetime(2016, 12, 30, 7, 2)    date2 = datetime.datetime(2017, 1, 1, 7, 3)    days = holidays.get_working_days(date1, date2)    assert len(days) == 1def test03c(holidays):    date1 = datetime.date(2016, 12, 30)    date2 = datetime.datetime(2017, 1, 1, 7, 3)    days = holidays.get_working_days(date1, date2)    assert len(days) == 1def test03d(holidays):    date1 = datetime.datetime(2016, 12, 30, 7, 2)    date2 = datetime.date(2017, 1, 1)    days = holidays.get_working_days(date1, date2)    assert len(days) == 1def test04a(holidays):    date1 = datetime.date(2016, 12, 25)    date2 = datetime.date(2016, 12, 26)    days = holidays.get_working_days(date1, date2)    assert len(days) == 0def test4b(holidays):    date1 = datetime.datetime(2016, 12, 25, 7, 1)    date2 = datetime.datetime(2016, 12, 26, 7, 2)    days = holidays.get_working_days(date1, date2)    assert len(days) == 0def test4c(holidays):    date1 = datetime.date(2016, 12, 25)    date2 = datetime.datetime(2016, 12, 26, 7, 2)    days = holidays.get_working_days(date1, date2)    assert len(days) == 0def test4d(holidays):    date1 = datetime.datetime(2016, 12, 25, 7, 1)    date2 = datetime.date(2016, 12, 26)    days = holidays.get_working_days(date1, date2)    assert len(days) == 0def test05a(holidays):    date1 = datetime.date(2016, 12, 22)    date2 = datetime.date(2016, 12, 26)    assert not holidays.is_bank_holiday(date1)    assert holidays.is_bank_holiday(date2)def test05b(holidays):    date1 = datetime.datetime(2016, 12, 22, 7, 2)    date2 = datetime.datetime(2016, 12, 26, 7, 3)    assert not holidays.is_bank_holiday(date1)    assert holidays.is_bank_holiday(date2)

@@ -4,23 +4,22 @@
 # Stub file for hols-uk.holidays
 #
 import datetime
-from typing import Set, Optional
+from typing import Set, Optional, Union
+
+Date = Union[datetime.date, datetime.time]
 
 
 class Holidays:
     _bank_holidays: Optional[Set[datetime.date]]
 
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
-    def is_working_day(self, date: datetime.date) -> bool:
-        ...
+    def is_working_day(self, date: Date) -> bool: ...
 
-    def get_bank_holidays(self) -> Optional[Set[datetime.date]]:
-        ...
+    def is_bank_holiday(self, date: Date) -> bool: ...
 
-    def get_working_days(self,
-                         date1: datetime.date,
-                         date2: datetime.date) \
+    def get_bank_holidays(self) -> Optional[Set[datetime.date]]: ...
+
+    def get_working_days(self, date1: Date, date2: Date) \
             -> Set[datetime.date]:
         ...
