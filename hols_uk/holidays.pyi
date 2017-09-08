@@ -6,7 +6,7 @@
 import datetime
 from typing import Set, Optional, Union
 
-Date = Union[datetime.date, datetime.time]
+Date = Union[datetime.date, datetime.datetime]
 
 
 class Holidays:
