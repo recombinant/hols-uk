@@ -3,6 +3,7 @@
 #
 import csv
 import datetime
+import logging
 from operator import itemgetter
 from pathlib import Path
 
@@ -17,6 +18,7 @@ from pathlib import Path
 class Holidays:
     def __init__(self):
         self._bank_holidays = None
+        self.logger = logging.getLogger(__package__)
 
     def is_working_day(self, date):
         """
@@ -41,9 +43,10 @@ class Holidays:
 
     def get_bank_holidays(self):
         if self._bank_holidays is None:
-            if datetime.date.today() > datetime.date(2018, 1, 1):
-                print('visit https://www.gov.uk/bank-holidays')
-                print('for the latest bank holidays')
+            if datetime.date.today() > datetime.date(2020, 1, 1):
+                self.logger.warning(
+                    'For the latest bank holidays - https://www.gov.uk/bank-holidays'
+                )
 
             holidays = set()
             csv_path = Path(__file__).parent / 'hols-uk.csv'

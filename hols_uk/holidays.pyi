@@ -4,6 +4,7 @@
 # Stub file for hols-uk.holidays
 #
 import datetime
+import logging
 from typing import Set, Optional, Union
 
 Date = Union[datetime.date, datetime.datetime]
@@ -11,6 +12,7 @@ Date = Union[datetime.date, datetime.datetime]
 
 class Holidays:
     _bank_holidays: Optional[Set[datetime.date]]
+    logger: logging.Logger
 
     def __init__(self) -> None: ...
 
