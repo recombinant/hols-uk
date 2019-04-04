@@ -12,7 +12,7 @@ Given a date determine if it is a working day. Assumes:
 Description
 ===========
 
-Tested with Python 3.5 only.
+Tested with Python 3.7 only.
 
 This package uses data from https://www.gov.uk/bank-holidays for statutory
 UK Bank Holidays to determine if a given date is a Bank Holiday::
@@ -28,10 +28,3 @@ UK Bank Holidays to determine if a given date is a Bank Holiday::
         print('Today is a working day')
     else:
         print('Today is at the weekend')
-
-
-Note
-====
-
-This project has been set up using PyScaffold 2.5.7. For details and usage
-information on PyScaffold see http://pyscaffold.readthedocs.org/.
