@@ -8,6 +8,8 @@ name = "pypi"
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
+wheel = "*"
+setuptools = "*"
 
 [requires]
 python_version = "3.7"

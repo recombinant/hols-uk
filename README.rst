@@ -28,3 +28,4 @@ UK Bank Holidays to determine if a given date is a Bank Holiday::
         print('Today is a working day')
     else:
         print('Today is at the weekend')
+
