@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='hols-uk',
-    version='1.2.5',
+    version='1.3.1',
     packages=['hols_uk'],
     url='https://github.com/recombinant/hols-uk/',
     license='',
