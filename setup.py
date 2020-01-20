@@ -16,6 +16,7 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'License :: OSI Approved :: ISC License (ISCL)',
     ],
     url='https://github.com/recombinant/hols-uk/',
